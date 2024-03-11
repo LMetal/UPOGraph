@@ -12,7 +12,7 @@ public class testUndirWeight {
     void testGetWeight(){
         /*
 
-        A --> B
+        A --- B
            2
 
         */
@@ -55,7 +55,7 @@ public class testUndirWeight {
         assertTrue(Sg1.containsEdge("C", "B"));
         assertTrue(Sg1.containsEdge("B", "C"));
 
-        assertFalse(Sg1.containsEdge("B", "A"));;
+        assertFalse(Sg1.containsEdge("B", "A"));
         assertFalse(Sg1.containsEdge("A", "B"));
 
         assertEquals(4, Sg1.getEdgeWeight("A", "C"));
@@ -197,18 +197,16 @@ public class testUndirWeight {
         g1.setEdgeWeight("A", "C", 4);
         g1.setEdgeWeight("C", "B", 3);
 
-        WeightedGraph Sg1 = g1.getBellmanFordShortestPaths("A");
+        AdjMatrixUndirWeight Sg1 = (AdjMatrixUndirWeight) g1.getBellmanFordShortestPaths("A");
         assertTrue(Sg1.containsVertex("A"));
         assertTrue(Sg1.containsVertex("B"));
         assertTrue(Sg1.containsVertex("C"));
 
-        assertTrue(Sg1.containsEdge("A", "C"));
-        assertTrue(Sg1.containsEdge("C", "B"));
+        assertEquals(2, Sg1.getAllEdges().size());
 
+        assertTrue(Sg1.containsEdge("A", "C"));
         assertFalse(Sg1.containsEdge("B", "A"));
-        assertFalse(Sg1.containsEdge("C", "A"));
-        assertFalse(Sg1.containsEdge("A", "B"));
-        assertFalse(Sg1.containsEdge("B", "C"));
+        assertTrue(Sg1.containsEdge("B", "C"));
 
         assertEquals(4, Sg1.getEdgeWeight("A", "C"));
         assertEquals(3, Sg1.getEdgeWeight("C", "B"));

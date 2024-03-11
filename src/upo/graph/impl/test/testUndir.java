@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import upo.graph.base.Graph;
 import upo.graph.base.VisitForest;
 import upo.graph.impl.AdjMatrixUndir;
+import upo.graph.impl.AdjMatrixUndirWeight;
 
 import java.util.*;
 
@@ -701,6 +702,22 @@ public class testUndir {
         assertEquals("[C, D]", Arrays.toString(edges.get(1)));
         assertEquals("[C, E]", Arrays.toString(edges.get(2)));
         assertEquals("[E, F]", Arrays.toString(edges.get(3)));
+
+        AdjMatrixUndir g3 = new AdjMatrixUndirWeight();
+
+        //      A
+        //     / \
+        //    B---C
+        //
+
+        g3.addVertex("A");
+        g3.addVertex("B");
+        g3.addVertex("C");
+        g3.addEdge("A", "B");
+        g3.addEdge("A", "C");
+        g3.addEdge("C", "B");
+
+        assertEquals(3, g3.getAllEdges().size());
     }
 
 }

@@ -75,14 +75,12 @@ public class AdjMatrixUndirWeight extends AdjMatrixUndir implements WeightedGrap
         }
 
         for(int i=0; i<labels.size()-1; i++){
-            for(String[] edge: getAllEdges()){
+            for(String[] edge: getAllEdgesBothDir()){
                 u = edge[0];
                 v = edge[1];
-                //System.out.println("if " + D.getDistance(v) +"("+ v +") > "+ D.getDistance(u) + "("+ u +") + " + this.getEdgeWeight(u, v));
                 if(D.getDistance(v) > D.getDistance(u) + this.getEdgeWeight(u, v)){
                     D.setParent(v, u);
                     D.setDistance(v, D.getDistance(u) + this.getEdgeWeight(u, v));
-                    //System.out.println("Rilasso da " + u +" a "+v);
                 }
             }
         }
@@ -103,6 +101,7 @@ public class AdjMatrixUndirWeight extends AdjMatrixUndir implements WeightedGrap
 
         return S;
     }
+
 
     /**
      * Calcola i cammini minimi da sorgente singola <code>startingVertex</code> utilizzando l'algoritmo

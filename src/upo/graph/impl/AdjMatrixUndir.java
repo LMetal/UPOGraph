@@ -2,7 +2,6 @@ package upo.graph.impl;
 
 import upo.graph.base.Graph;
 import upo.graph.base.VisitForest;
-import upo.graph.impl.visite.VisitForestBFS;
 import upo.graph.impl.visite.VisitForestDFS;
 import upo.graph.impl.visite.VisitForestFrangia;
 
@@ -33,6 +32,17 @@ public class AdjMatrixUndir extends AdjMatrixDir implements Graph {
             for(String u: labels){
                 if(getVertexIndex(u) > getVertexIndex(v))
                     if(containsEdge(v, u)) list.add(new String[]{v, u});
+            }
+        }
+        return list;
+    }
+
+    protected ArrayList<String[]> getAllEdgesBothDir() {
+        ArrayList<String[]> list = new ArrayList<>();
+
+        for (String v: labels){
+            for(String u: labels){
+                if(containsEdge(v, u)) list.add(new String[]{v, u});
             }
         }
         return list;
